@@ -14,6 +14,7 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as OrdersRouteImport } from './routes/orders'
+import { Route as ProducerDashboardRouteImport } from './routes/producer-dashboard'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ProducerProducerIdRouteImport } from './routes/producer.$producerId'
@@ -44,6 +45,11 @@ const ExploreRoute = ExploreRouteImport.update({
 const OrdersRoute = OrdersRouteImport.update({
   id: '/orders',
   path: '/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducerDashboardRoute = ProducerDashboardRouteImport.update({
+  id: '/producer-dashboard',
+  path: '/producer-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/explore': typeof ExploreRoute
   '/orders': typeof OrdersRoute
+  '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/explore': typeof ExploreRoute
   '/orders': typeof OrdersRoute
+  '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/explore': typeof ExploreRoute
   '/orders': typeof OrdersRoute
+  '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/explore'
     | '/orders'
+    | '/producer-dashboard'
     | '/profile'
     | '/shop'
     | '/producer/$producerId'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/explore'
     | '/orders'
+    | '/producer-dashboard'
     | '/profile'
     | '/shop'
     | '/producer/$producerId'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/explore'
     | '/orders'
+    | '/producer-dashboard'
     | '/profile'
     | '/shop'
     | '/producer/$producerId'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   ExploreRoute: typeof ExploreRoute
   OrdersRoute: typeof OrdersRoute
+  ProducerDashboardRoute: typeof ProducerDashboardRoute
   ProfileRoute: typeof ProfileRoute
   ShopRoute: typeof ShopRoute
   ProducerProducerIdRoute: typeof ProducerProducerIdRoute
@@ -208,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/orders'
       fullPath: '/orders'
       preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producer-dashboard': {
+      id: '/producer-dashboard'
+      path: '/producer-dashboard'
+      fullPath: '/producer-dashboard'
+      preLoaderRoute: typeof ProducerDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -261,6 +281,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   ExploreRoute: ExploreRoute,
   OrdersRoute: OrdersRoute,
+  ProducerDashboardRoute: ProducerDashboardRoute,
   ProfileRoute: ProfileRoute,
   ShopRoute: ShopRoute,
   ProducerProducerIdRoute: ProducerProducerIdRoute,
