@@ -19,7 +19,7 @@ export const Route = createFileRoute("/producer-dashboard")({
       { property: "og:description", content: "Track earnings and orders in your own language." },
     ],
   }),
-  component: ProducerDashboard;
+  component: ProducerDashboard,
 });
 
 function ProducerDashboard() {
