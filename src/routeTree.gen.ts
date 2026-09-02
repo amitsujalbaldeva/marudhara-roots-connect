@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as VillageVillageIdRouteImport } from './routes/village.$villageId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VillageVillageIdRoute = VillageVillageIdRouteImport.update({
+  id: '/village/$villageId',
+  path: '/village/$villageId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/shop': typeof ShopRoute
+  '/village/$villageId': typeof VillageVillageIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/shop': typeof ShopRoute
+  '/village/$villageId': typeof VillageVillageIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/shop': typeof ShopRoute
+  '/village/$villageId': typeof VillageVillageIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/shop'
+  fullPaths: '/' | '/explore' | '/shop' | '/village/$villageId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/shop'
-  id: '__root__' | '/' | '/explore' | '/shop'
+  to: '/' | '/explore' | '/shop' | '/village/$villageId'
+  id: '__root__' | '/' | '/explore' | '/shop' | '/village/$villageId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExploreRoute: typeof ExploreRoute
   ShopRoute: typeof ShopRoute
+  VillageVillageIdRoute: typeof VillageVillageIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/village/$villageId': {
+      id: '/village/$villageId'
+      path: '/village/$villageId'
+      fullPath: '/village/$villageId'
+      preLoaderRoute: typeof VillageVillageIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExploreRoute: ExploreRoute,
   ShopRoute: ShopRoute,
+  VillageVillageIdRoute: VillageVillageIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
