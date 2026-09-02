@@ -14,7 +14,154 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      producer_products: {
+        Row: {
+          category: string | null
+          created_at: string
+          facilities: string | null
+          id: string
+          image_url: string | null
+          name: string
+          price: number
+          producer_id: string
+          stock: number
+          story: string | null
+          unit: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          facilities?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          price?: number
+          producer_id: string
+          stock?: number
+          story?: string | null
+          unit?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          facilities?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          price?: number
+          producer_id?: string
+          stock?: number
+          story?: string | null
+          unit?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "producer_products_producer_id_fkey"
+            columns: ["producer_id"]
+            isOneToOne: false
+            referencedRelation: "producer_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      producer_profiles: {
+        Row: {
+          craft: string | null
+          created_at: string
+          district: string
+          id: string
+          name: string
+          phone: string | null
+          photo_url: string | null
+          story: string | null
+          updated_at: string
+          user_id: string
+          verified: boolean
+          village_name: string
+        }
+        Insert: {
+          craft?: string | null
+          created_at?: string
+          district: string
+          id?: string
+          name: string
+          phone?: string | null
+          photo_url?: string | null
+          story?: string | null
+          updated_at?: string
+          user_id: string
+          verified?: boolean
+          village_name: string
+        }
+        Update: {
+          craft?: string | null
+          created_at?: string
+          district?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          photo_url?: string | null
+          story?: string | null
+          updated_at?: string
+          user_id?: string
+          verified?: boolean
+          village_name?: string
+        }
+        Relationships: []
+      }
+      village_culture: {
+        Row: {
+          created_at: string
+          description: string | null
+          district: string | null
+          id: string
+          image_urls: string[]
+          producer_id: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          village_name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          district?: string | null
+          id?: string
+          image_urls?: string[]
+          producer_id?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+          village_name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          district?: string | null
+          id?: string
+          image_urls?: string[]
+          producer_id?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          village_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "village_culture_producer_id_fkey"
+            columns: ["producer_id"]
+            isOneToOne: false
+            referencedRelation: "producer_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
