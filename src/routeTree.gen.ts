@@ -10,33 +10,193 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as OrdersRouteImport } from './routes/orders'
+import { Route as ProducerDashboardRouteImport } from './routes/producer-dashboard'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ProducerProducerIdRouteImport } from './routes/producer.$producerId'
+import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
+import { Route as VillageVillageIdRouteImport } from './routes/village.$villageId'
+import { Route as BookKindIdRouteImport } from './routes/book.$kind.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducerDashboardRoute = ProducerDashboardRouteImport.update({
+  id: '/producer-dashboard',
+  path: '/producer-dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProducerProducerIdRoute = ProducerProducerIdRouteImport.update({
+  id: '/producer/$producerId',
+  path: '/producer/$producerId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductProductIdRoute = ProductProductIdRouteImport.update({
+  id: '/product/$productId',
+  path: '/product/$productId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VillageVillageIdRoute = VillageVillageIdRouteImport.update({
+  id: '/village/$villageId',
+  path: '/village/$villageId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookKindIdRoute = BookKindIdRouteImport.update({
+  id: '/book/$kind/$id',
+  path: '/book/$kind/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/explore': typeof ExploreRoute
+  '/orders': typeof OrdersRoute
+  '/producer-dashboard': typeof ProducerDashboardRoute
+  '/profile': typeof ProfileRoute
+  '/shop': typeof ShopRoute
+  '/producer/$producerId': typeof ProducerProducerIdRoute
+  '/product/$productId': typeof ProductProductIdRoute
+  '/village/$villageId': typeof VillageVillageIdRoute
+  '/book/$kind/$id': typeof BookKindIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/explore': typeof ExploreRoute
+  '/orders': typeof OrdersRoute
+  '/producer-dashboard': typeof ProducerDashboardRoute
+  '/profile': typeof ProfileRoute
+  '/shop': typeof ShopRoute
+  '/producer/$producerId': typeof ProducerProducerIdRoute
+  '/product/$productId': typeof ProductProductIdRoute
+  '/village/$villageId': typeof VillageVillageIdRoute
+  '/book/$kind/$id': typeof BookKindIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/explore': typeof ExploreRoute
+  '/orders': typeof OrdersRoute
+  '/producer-dashboard': typeof ProducerDashboardRoute
+  '/profile': typeof ProfileRoute
+  '/shop': typeof ShopRoute
+  '/producer/$producerId': typeof ProducerProducerIdRoute
+  '/product/$productId': typeof ProductProductIdRoute
+  '/village/$villageId': typeof VillageVillageIdRoute
+  '/book/$kind/$id': typeof BookKindIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/checkout'
+    | '/explore'
+    | '/orders'
+    | '/producer-dashboard'
+    | '/profile'
+    | '/shop'
+    | '/producer/$producerId'
+    | '/product/$productId'
+    | '/village/$villageId'
+    | '/book/$kind/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/checkout'
+    | '/explore'
+    | '/orders'
+    | '/producer-dashboard'
+    | '/profile'
+    | '/shop'
+    | '/producer/$producerId'
+    | '/product/$productId'
+    | '/village/$villageId'
+    | '/book/$kind/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/checkout'
+    | '/explore'
+    | '/orders'
+    | '/producer-dashboard'
+    | '/profile'
+    | '/shop'
+    | '/producer/$producerId'
+    | '/product/$productId'
+    | '/village/$villageId'
+    | '/book/$kind/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
+  ExploreRoute: typeof ExploreRoute
+  OrdersRoute: typeof OrdersRoute
+  ProducerDashboardRoute: typeof ProducerDashboardRoute
+  ProfileRoute: typeof ProfileRoute
+  ShopRoute: typeof ShopRoute
+  ProducerProducerIdRoute: typeof ProducerProducerIdRoute
+  ProductProductIdRoute: typeof ProductProductIdRoute
+  VillageVillageIdRoute: typeof VillageVillageIdRoute
+  BookKindIdRoute: typeof BookKindIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +208,107 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producer-dashboard': {
+      id: '/producer-dashboard'
+      path: '/producer-dashboard'
+      fullPath: '/producer-dashboard'
+      preLoaderRoute: typeof ProducerDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producer/$producerId': {
+      id: '/producer/$producerId'
+      path: '/producer/$producerId'
+      fullPath: '/producer/$producerId'
+      preLoaderRoute: typeof ProducerProducerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product/$productId': {
+      id: '/product/$productId'
+      path: '/product/$productId'
+      fullPath: '/product/$productId'
+      preLoaderRoute: typeof ProductProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/village/$villageId': {
+      id: '/village/$villageId'
+      path: '/village/$villageId'
+      fullPath: '/village/$villageId'
+      preLoaderRoute: typeof VillageVillageIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book/$kind/$id': {
+      id: '/book/$kind/$id'
+      path: '/book/$kind/$id'
+      fullPath: '/book/$kind/$id'
+      preLoaderRoute: typeof BookKindIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
+  ExploreRoute: ExploreRoute,
+  OrdersRoute: OrdersRoute,
+  ProducerDashboardRoute: ProducerDashboardRoute,
+  ProfileRoute: ProfileRoute,
+  ShopRoute: ShopRoute,
+  ProducerProducerIdRoute: ProducerProducerIdRoute,
+  ProductProductIdRoute: ProductProductIdRoute,
+  VillageVillageIdRoute: VillageVillageIdRoute,
+  BookKindIdRoute: BookKindIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

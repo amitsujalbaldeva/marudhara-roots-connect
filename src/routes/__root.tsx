@@ -11,6 +11,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { BottomNav } from "../components/BottomNav";
+import { LanguageGate } from "../components/LanguageGate";
+import { LanguageProvider } from "../lib/i18n";
+import { AppProvider } from "../lib/store";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +81,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "MARUDHARA — Rajasthan's Village-to-World Platform" },
+      {
+        name: "description",
+        content:
+          "Discover Rajasthan. Experience Local. Buy Direct. Village homestays, artisan stories and shelf-stable goods from Udaipur, Bikaner and Jodhpur.",
+      },
+      { name: "author", content: "MARUDHARA" },
+      { property: "og:title", content: "MARUDHARA — Rajasthan's Village-to-World Platform" },
+      {
+        property: "og:description",
+        content: "Discover Rajasthan. Experience Local. Buy Direct.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -119,8 +130,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <LanguageProvider>
+        <AppProvider>
+          <LanguageGate />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+          <BottomNav />
+        </AppProvider>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
