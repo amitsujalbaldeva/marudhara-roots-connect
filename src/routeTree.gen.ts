@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ExploreRouteImport } from './routes/explore'
@@ -18,6 +19,7 @@ import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as ProducerDashboardRouteImport } from './routes/producer-dashboard'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as StudioRouteImport } from './routes/studio'
 import { Route as ProducerProducerIdRouteImport } from './routes/producer.$producerId'
 import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
 import { Route as VillageVillageIdRouteImport } from './routes/village.$villageId'
@@ -31,6 +33,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -68,6 +75,11 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProducerProducerIdRoute = ProducerProducerIdRouteImport.update({
   id: '/producer/$producerId',
   path: '/producer/$producerId',
@@ -92,6 +104,7 @@ const BookKindIdRoute = BookKindIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/explore': typeof ExploreRoute
@@ -99,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
+  '/studio': typeof StudioRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -107,6 +121,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/explore': typeof ExploreRoute
@@ -114,6 +129,7 @@ export interface FileRoutesByTo {
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
+  '/studio': typeof StudioRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -123,6 +139,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/explore': typeof ExploreRoute
@@ -130,6 +147,7 @@ export interface FileRoutesById {
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
+  '/studio': typeof StudioRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -140,6 +158,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/auth'
     | '/cart'
     | '/checkout'
     | '/explore'
@@ -147,6 +166,7 @@ export interface FileRouteTypes {
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
+    | '/studio'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -155,6 +175,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/auth'
     | '/cart'
     | '/checkout'
     | '/explore'
@@ -162,6 +183,7 @@ export interface FileRouteTypes {
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
+    | '/studio'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -170,6 +192,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/auth'
     | '/cart'
     | '/checkout'
     | '/explore'
@@ -177,6 +200,7 @@ export interface FileRouteTypes {
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
+    | '/studio'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -186,6 +210,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   ExploreRoute: typeof ExploreRoute
@@ -193,6 +218,7 @@ export interface RootRouteChildren {
   ProducerDashboardRoute: typeof ProducerDashboardRoute
   ProfileRoute: typeof ProfileRoute
   ShopRoute: typeof ShopRoute
+  StudioRoute: typeof StudioRoute
   ProducerProducerIdRoute: typeof ProducerProducerIdRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
   VillageVillageIdRoute: typeof VillageVillageIdRoute
@@ -213,6 +239,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -264,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/producer/$producerId': {
       id: '/producer/$producerId'
       path: '/producer/$producerId'
@@ -298,6 +338,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   ExploreRoute: ExploreRoute,
@@ -305,6 +346,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProducerDashboardRoute: ProducerDashboardRoute,
   ProfileRoute: ProfileRoute,
   ShopRoute: ShopRoute,
+  StudioRoute: StudioRoute,
   ProducerProducerIdRoute: ProducerProducerIdRoute,
   ProductProductIdRoute: ProductProductIdRoute,
   VillageVillageIdRoute: VillageVillageIdRoute,
