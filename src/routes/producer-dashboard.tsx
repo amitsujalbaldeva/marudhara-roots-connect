@@ -26,7 +26,7 @@ function ProducerDashboard() {
   const { t } = useLang();
   const L = useLocal();
   const { orders, advanceOrder, commission } = useApp();
-  const me = producers[0];
+  const me = producers[0]!;
   const myProducts = products.filter((p) => p.producerId === me.id);
 
   const [form, setForm] = useState({ name: "", price: "", story: "" });
