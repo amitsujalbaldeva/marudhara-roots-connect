@@ -19,6 +19,7 @@ import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as ProducerDashboardRouteImport } from './routes/producer-dashboard'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as StudioRouteImport } from './routes/studio'
 import { Route as ProducerProducerIdRouteImport } from './routes/producer.$producerId'
 import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
 import { Route as VillageVillageIdRouteImport } from './routes/village.$villageId'
@@ -74,6 +75,11 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProducerProducerIdRoute = ProducerProducerIdRouteImport.update({
   id: '/producer/$producerId',
   path: '/producer/$producerId',
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
+  '/studio': typeof StudioRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
+  '/studio': typeof StudioRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
+  '/studio': typeof StudioRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
+    | '/studio'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
+    | '/studio'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
+    | '/studio'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -206,6 +218,7 @@ export interface RootRouteChildren {
   ProducerDashboardRoute: typeof ProducerDashboardRoute
   ProfileRoute: typeof ProfileRoute
   ShopRoute: typeof ShopRoute
+  StudioRoute: typeof StudioRoute
   ProducerProducerIdRoute: typeof ProducerProducerIdRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
   VillageVillageIdRoute: typeof VillageVillageIdRoute
@@ -284,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/producer/$producerId': {
       id: '/producer/$producerId'
       path: '/producer/$producerId'
@@ -326,6 +346,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProducerDashboardRoute: ProducerDashboardRoute,
   ProfileRoute: ProfileRoute,
   ShopRoute: ShopRoute,
+  StudioRoute: StudioRoute,
   ProducerProducerIdRoute: ProducerProducerIdRoute,
   ProductProductIdRoute: ProductProductIdRoute,
   VillageVillageIdRoute: VillageVillageIdRoute,
