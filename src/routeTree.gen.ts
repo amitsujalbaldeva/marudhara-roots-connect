@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
 import { Route as VillageVillageIdRouteImport } from './routes/village.$villageId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductProductIdRoute = ProductProductIdRouteImport.update({
+  id: '/product/$productId',
+  path: '/product/$productId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VillageVillageIdRoute = VillageVillageIdRouteImport.update({
   id: '/village/$villageId',
   path: '/village/$villageId',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/shop': typeof ShopRoute
+  '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/shop': typeof ShopRoute
+  '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,29 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
   '/shop': typeof ShopRoute
+  '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/shop' | '/village/$villageId'
+  fullPaths:
+    '/' | '/explore' | '/shop' | '/product/$productId' | '/village/$villageId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/shop' | '/village/$villageId'
-  id: '__root__' | '/' | '/explore' | '/shop' | '/village/$villageId'
+  to: '/' | '/explore' | '/shop' | '/product/$productId' | '/village/$villageId'
+  id:
+    | '__root__'
+    | '/'
+    | '/explore'
+    | '/shop'
+    | '/product/$productId'
+    | '/village/$villageId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExploreRoute: typeof ExploreRoute
   ShopRoute: typeof ShopRoute
+  ProductProductIdRoute: typeof ProductProductIdRoute
   VillageVillageIdRoute: typeof VillageVillageIdRoute
 }
 
@@ -92,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$productId': {
+      id: '/product/$productId'
+      path: '/product/$productId'
+      fullPath: '/product/$productId'
+      preLoaderRoute: typeof ProductProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/village/$villageId': {
       id: '/village/$villageId'
       path: '/village/$villageId'
@@ -106,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExploreRoute: ExploreRoute,
   ShopRoute: ShopRoute,
+  ProductProductIdRoute: ProductProductIdRoute,
   VillageVillageIdRoute: VillageVillageIdRoute,
 }
 export const routeTree = rootRouteImport
