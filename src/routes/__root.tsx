@@ -125,11 +125,10 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <AppProvider>
-          <LanguageGate>
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-            <Outlet />
-            <BottomNav />
-          </LanguageGate>
+          <LanguageGate />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+          <BottomNav />
         </AppProvider>
       </LanguageProvider>
     </QueryClientProvider>
