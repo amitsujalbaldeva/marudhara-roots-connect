@@ -75,7 +75,7 @@ function Home() {
       <ul className="flex gap-3 overflow-x-auto px-4 pb-1">
         {districts.map((d) => (
           <li key={d.id} className="shrink-0">
-            <Link to="/explore" className="chip-lg">
+            <Link to="/explore" className="chip h-11 px-4">
               {L(d.name)} · {d.villages}
             </Link>
           </li>
