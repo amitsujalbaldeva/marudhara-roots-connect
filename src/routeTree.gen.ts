@@ -18,6 +18,7 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ProducerProducerIdRouteImport } from './routes/producer.$producerId'
 import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
 import { Route as VillageVillageIdRouteImport } from './routes/village.$villageId'
+import { Route as BookKindIdRouteImport } from './routes/book.$kind.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const VillageVillageIdRoute = VillageVillageIdRouteImport.update({
   path: '/village/$villageId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookKindIdRoute = BookKindIdRouteImport.update({
+  id: '/book/$kind/$id',
+  path: '/book/$kind/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
+  '/book/$kind/$id': typeof BookKindIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
+  '/book/$kind/$id': typeof BookKindIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
+  '/book/$kind/$id': typeof BookKindIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
+    | '/book/$kind/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
+    | '/book/$kind/$id'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
+    | '/book/$kind/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   ProducerProducerIdRoute: typeof ProducerProducerIdRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
   VillageVillageIdRoute: typeof VillageVillageIdRoute
+  BookKindIdRoute: typeof BookKindIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VillageVillageIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/book/$kind/$id': {
+      id: '/book/$kind/$id'
+      path: '/book/$kind/$id'
+      fullPath: '/book/$kind/$id'
+      preLoaderRoute: typeof BookKindIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProducerProducerIdRoute: ProducerProducerIdRoute,
   ProductProductIdRoute: ProductProductIdRoute,
   VillageVillageIdRoute: VillageVillageIdRoute,
+  BookKindIdRoute: BookKindIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
