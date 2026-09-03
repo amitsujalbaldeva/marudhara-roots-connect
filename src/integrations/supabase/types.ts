@@ -81,6 +81,8 @@ export type Database = {
           photo_url: string | null
           story: string | null
           updated_at: string
+          upi_id: string | null
+          upi_name: string | null
           user_id: string
           verified: boolean
           village_name: string
@@ -95,6 +97,8 @@ export type Database = {
           photo_url?: string | null
           story?: string | null
           updated_at?: string
+          upi_id?: string | null
+          upi_name?: string | null
           user_id: string
           verified?: boolean
           village_name: string
@@ -109,6 +113,8 @@ export type Database = {
           photo_url?: string | null
           story?: string | null
           updated_at?: string
+          upi_id?: string | null
+          upi_name?: string | null
           user_id?: string
           verified?: boolean
           village_name?: string
