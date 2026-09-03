@@ -71,7 +71,15 @@ function Profile() {
       </div>
 
       <div className="grid gap-3 px-4 pt-6">
-        <Link to="/producer-dashboard" className="tap btn-teal w-full text-sm">
+        <Link to="/studio" className="tap btn-primary w-full text-sm">
+          <LayoutDashboard className="h-4 w-4" />
+          मेरा स्टूडियो / My maker studio
+        </Link>
+        <Link to="/community" className="tap btn-teal w-full text-sm">
+          <LayoutDashboard className="h-4 w-4" />
+          गाँव समुदाय / Live village community
+        </Link>
+        <Link to="/producer-dashboard" className="tap btn-outline w-full text-sm">
           <LayoutDashboard className="h-4 w-4" />
           {t("producerDashboard")}
         </Link>
@@ -80,6 +88,7 @@ function Profile() {
           {t("adminDashboard")}
         </Link>
       </div>
+
 
       {followed.length ? (
         <>

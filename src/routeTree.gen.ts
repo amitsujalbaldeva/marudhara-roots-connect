@@ -14,12 +14,14 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as ProducerDashboardRouteImport } from './routes/producer-dashboard'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as MakerIdRouteImport } from './routes/maker.$id'
 import { Route as ProducerProducerIdRouteImport } from './routes/producer.$producerId'
 import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
 import { Route as VillageVillageIdRouteImport } from './routes/village.$villageId'
@@ -48,6 +50,11 @@ const CartRoute = CartRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExploreRoute = ExploreRouteImport.update({
@@ -80,6 +87,11 @@ const StudioRoute = StudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MakerIdRoute = MakerIdRouteImport.update({
+  id: '/maker/$id',
+  path: '/maker/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProducerProducerIdRoute = ProducerProducerIdRouteImport.update({
   id: '/producer/$producerId',
   path: '/producer/$producerId',
@@ -107,12 +119,14 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
   '/orders': typeof OrdersRoute
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -124,12 +138,14 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
   '/orders': typeof OrdersRoute
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -142,12 +158,14 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
   '/orders': typeof OrdersRoute
   '/producer-dashboard': typeof ProducerDashboardRoute
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/village/$villageId': typeof VillageVillageIdRoute
@@ -161,12 +179,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/cart'
     | '/checkout'
+    | '/community'
     | '/explore'
     | '/orders'
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -178,12 +198,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/cart'
     | '/checkout'
+    | '/community'
     | '/explore'
     | '/orders'
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -195,12 +217,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/cart'
     | '/checkout'
+    | '/community'
     | '/explore'
     | '/orders'
     | '/producer-dashboard'
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
     | '/village/$villageId'
@@ -213,12 +237,14 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  CommunityRoute: typeof CommunityRoute
   ExploreRoute: typeof ExploreRoute
   OrdersRoute: typeof OrdersRoute
   ProducerDashboardRoute: typeof ProducerDashboardRoute
   ProfileRoute: typeof ProfileRoute
   ShopRoute: typeof ShopRoute
   StudioRoute: typeof StudioRoute
+  MakerIdRoute: typeof MakerIdRoute
   ProducerProducerIdRoute: typeof ProducerProducerIdRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
   VillageVillageIdRoute: typeof VillageVillageIdRoute
@@ -260,6 +286,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explore': {
@@ -304,6 +337,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/maker/$id': {
+      id: '/maker/$id'
+      path: '/maker/$id'
+      fullPath: '/maker/$id'
+      preLoaderRoute: typeof MakerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/producer/$producerId': {
       id: '/producer/$producerId'
       path: '/producer/$producerId'
@@ -341,12 +381,14 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  CommunityRoute: CommunityRoute,
   ExploreRoute: ExploreRoute,
   OrdersRoute: OrdersRoute,
   ProducerDashboardRoute: ProducerDashboardRoute,
   ProfileRoute: ProfileRoute,
   ShopRoute: ShopRoute,
   StudioRoute: StudioRoute,
+  MakerIdRoute: MakerIdRoute,
   ProducerProducerIdRoute: ProducerProducerIdRoute,
   ProductProductIdRoute: ProductProductIdRoute,
   VillageVillageIdRoute: VillageVillageIdRoute,
