@@ -191,14 +191,20 @@ function Studio() {
 
   async function removeProduct(id: string) {
     const { error } = await supabase.from("producer_products").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     qc.invalidateQueries({ queryKey: ["my-products"] });
     qc.invalidateQueries({ queryKey: ["live-products"] });
   }
 
   async function removeCulture(id: string) {
     const { error } = await supabase.from("village_culture").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     qc.invalidateQueries({ queryKey: ["my-culture"] });
     qc.invalidateQueries({ queryKey: ["live-culture"] });
   }
