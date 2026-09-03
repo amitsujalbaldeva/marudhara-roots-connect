@@ -105,6 +105,8 @@ function Studio() {
       craft: profile.craft ?? "",
       story: profile.story ?? "",
       phone: profile.phone ?? "",
+      upi_id: profile.upi_id ?? "",
+      upi_name: profile.upi_name ?? "",
     });
   }, [profile]);
 
