@@ -15,6 +15,7 @@ import { BottomNav } from "../components/BottomNav";
 import { LanguageGate } from "../components/LanguageGate";
 import { LanguageProvider } from "../lib/i18n";
 import { AppProvider } from "../lib/store";
+import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -136,6 +137,7 @@ function RootComponent() {
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
           <BottomNav />
+          <Toaster />
         </AppProvider>
       </LanguageProvider>
     </QueryClientProvider>
