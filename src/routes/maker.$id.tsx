@@ -30,6 +30,48 @@ function Media({ path, className }: { path?: string | null; className?: string }
   return <img src={url} alt="" className={className} loading="lazy" />;
 }
 
+function UpiPay({ upiId, payeeName }: { upiId: string; payeeName: string }) {
+  const [amount, setAmount] = useState("");
+  const link = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payeeName)}&cu=INR${
+    Number(amount) > 0 ? `&am=${Number(amount)}` : ""
+  }`;
+
+  return (
+    <div className="surface mt-4 grid gap-3 p-4">
+      <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-teal">
+        <IndianRupee className="h-4 w-4" /> ऑनलाइन भुगतान / Pay online
+      </p>
+      <p className="text-sm">
+        UPI: <span className="font-bold">{upiId}</span>
+        <span className="block text-xs text-muted-foreground">{payeeName}</span>
+      </p>
+      <input
+        value={amount}
+        onChange={(e) => setAmount(e.target.value.replace(/[^\d]/g, ""))}
+        inputMode="numeric"
+        placeholder="राशि ₹ / Amount (optional)"
+        className="h-12 w-full rounded-2xl border border-border bg-card px-3 text-base"
+      />
+      <a href={link} className="tap btn-primary w-full text-sm">
+        GPay / PhonePe / Paytm से भेजें
+      </a>
+      <button
+        type="button"
+        onClick={async () => {
+          await navigator.clipboard.writeText(upiId);
+          toast.success("UPI ID कॉपी हो गई / Copied");
+        }}
+        className="tap btn-outline w-full text-sm"
+      >
+        <Copy className="h-4 w-4" /> UPI ID कॉपी करें
+      </button>
+      <p className="text-[11px] leading-relaxed text-muted-foreground">
+        पैसा सीधे कारीगर के खाते में जाता है। भेजने से पहले नाम ज़रूर देखें।
+      </p>
+    </div>
+  );
+}
+
 function MakerPage() {
   const { id } = Route.useParams();
   const L = useLocal();
