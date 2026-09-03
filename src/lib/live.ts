@@ -10,6 +10,8 @@ export type LiveProfile = {
   craft: string | null;
   story: string | null;
   phone: string | null;
+  upi_id: string | null;
+  upi_name: string | null;
   photo_url: string | null;
   verified: boolean;
   created_at: string;
