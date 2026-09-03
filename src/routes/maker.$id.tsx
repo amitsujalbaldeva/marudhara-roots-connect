@@ -131,6 +131,8 @@ function MakerPage() {
             <Phone className="h-4 w-4" /> {maker.phone}
           </a>
         ) : null}
+
+        {maker.upi_id ? <UpiPay upiId={maker.upi_id} payeeName={maker.upi_name ?? maker.name} /> : null}
       </div>
 
       {productsQ.data?.length ? (
