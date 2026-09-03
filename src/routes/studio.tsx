@@ -266,6 +266,28 @@ function Studio() {
         </select>
         <input value={p.craft} onChange={(e) => setP({ ...p, craft: e.target.value })} placeholder="काम / Craft (जैसे: पापड़, बंधेज)" className={input} />
         <input value={p.phone} onChange={(e) => setP({ ...p, phone: e.target.value })} inputMode="tel" placeholder="मोबाइल नंबर / Phone" className={input} />
+        <div className="surface grid gap-3 p-3">
+          <p className="text-xs font-bold text-teal">
+            पैसा सीधे आपके खाते में / Get paid directly
+          </p>
+          <input
+            value={p.upi_id}
+            onChange={(e) => setP({ ...p, upi_id: e.target.value })}
+            inputMode="email"
+            autoCapitalize="none"
+            placeholder="UPI ID (GPay/PhonePe/Paytm) जैसे 9876543210@ybl"
+            className={input}
+          />
+          <input
+            value={p.upi_name}
+            onChange={(e) => setP({ ...p, upi_name: e.target.value })}
+            placeholder="UPI में नाम / Name on UPI account"
+            className={input}
+          />
+          <p className="text-[11px] leading-relaxed text-muted-foreground">
+            यह UPI ID आपके पेज पर दिखेगी, पर्यटक सीधे GPay / PhonePe / Paytm से पैसे भेज सकेंगे।
+          </p>
+        </div>
         <textarea value={p.story} onChange={(e) => setP({ ...p, story: e.target.value })} rows={4} placeholder="आपकी कहानी / Your story" className="w-full rounded-2xl border border-border bg-card p-3 text-base" />
         <label className="tap surface grid place-items-center gap-1 p-5 text-xs font-bold text-muted-foreground">
           <UploadCloud className="h-6 w-6 text-primary" />
