@@ -115,7 +115,18 @@ function Studio() {
       if (!p.name.trim() || !p.village_name.trim()) throw new Error("नाम और गाँव ज़रूरी है");
       let photo_url = profile?.photo_url ?? null;
       if (photo) photo_url = await uploadMedia(user!.id, photo);
-      const row = { ...p, name: p.name.trim(), village_name: p.village_name.trim(), photo_url, user_id: user!.id };
+      const upi = p.upi_id.trim();
+      if (upi && !/^[\w.\-]{2,}@[a-zA-Z]{2,}$/.test(upi))
+        throw new Error("UPI ID सही नहीं है (जैसे: 9876543210@ybl)");
+      const row = {
+        ...p,
+        name: p.name.trim(),
+        village_name: p.village_name.trim(),
+        upi_id: upi || null,
+        upi_name: p.upi_name.trim() || null,
+        photo_url,
+        user_id: user!.id,
+      };
       const { error } = await supabase
         .from("producer_profiles")
         .upsert(row, { onConflict: "user_id" });
