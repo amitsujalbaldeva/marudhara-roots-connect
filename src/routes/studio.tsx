@@ -91,6 +91,8 @@ function Studio() {
     craft: "",
     story: "",
     phone: "",
+    upi_id: "",
+    upi_name: "",
   });
   const [photo, setPhoto] = useState<File | null>(null);
 
