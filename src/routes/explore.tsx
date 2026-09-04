@@ -39,6 +39,26 @@ function Explore() {
     <Screen>
       <TopBar title={t("explore")} back={false} />
 
+      <div className="px-4 pt-4">
+        <Link to="/nearby" className="surface flex items-center gap-3 p-3">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-teal/12 text-teal">
+            <Navigation className="h-5 w-5" />
+          </span>
+          <span className="min-w-0">
+            <span className="block text-sm font-bold">
+              {L({ en: "Villages near me", hi: "मेरे पास के गाँव" })}
+            </span>
+            <span className="block text-xs text-muted-foreground">
+              {L({
+                en: "Distance & directions from Jaipur, Jodhpur, Udaipur…",
+                hi: "जयपुर, जोधपुर, उदयपुर से दूरी और रास्ता",
+              })}
+            </span>
+          </span>
+        </Link>
+      </div>
+
+
       <div className="flex gap-2 overflow-x-auto px-4 pt-4">
         {[{ id: "all", name: { en: t("allDistricts"), hi: t("allDistricts") } }, ...districts].map(
           (d) => (
