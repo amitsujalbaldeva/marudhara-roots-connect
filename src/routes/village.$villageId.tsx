@@ -1,17 +1,25 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { CalendarDays, MapPin } from "lucide-react";
+import { CalendarDays, Clock, MapPin, Navigation } from "lucide-react";
+import { useState } from "react";
 import { Screen, SectionHead, TopBar } from "@/components/AppShell";
 import { MakerCard, ProductCard } from "@/components/cards";
 import {
   districtName,
+  distanceKm,
+  driveHours,
   experiences,
   getVillage,
   homestays,
+  mapsDirectionsUrl,
+  mapsPlaceUrl,
+  originCities,
   producers,
   products,
+  type OriginCity,
 } from "@/lib/data";
 import { useLang, useLocal } from "@/lib/i18n";
 import { rupee } from "@/lib/store";
+
 
 export const Route = createFileRoute("/village/$villageId")({
   loader: ({ params }) => {
