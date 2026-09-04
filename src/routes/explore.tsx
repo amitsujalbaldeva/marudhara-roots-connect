@@ -1,9 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Navigation } from "lucide-react";
 import { useState } from "react";
 import { Screen, SectionHead, TopBar } from "@/components/AppShell";
 import { MakerCard, VillageCard } from "@/components/cards";
 import { districts, producers, villages } from "@/lib/data";
 import { useLang, useLocal } from "@/lib/i18n";
+
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
