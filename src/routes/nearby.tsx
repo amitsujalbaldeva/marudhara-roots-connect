@@ -95,7 +95,7 @@ function Nearby() {
                 <Link
                   to="/village/$villageId"
                   params={{ villageId: village.id }}
-                  className="tap btn-ghost h-10 text-xs"
+                  className="tap btn-outline h-10 text-xs"
                 >
                   {L({ en: "Open village", hi: "गाँव देखें" })}
                 </Link>
