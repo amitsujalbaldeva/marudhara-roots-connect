@@ -47,6 +47,8 @@ export type Village = {
   id: string;
   name: Bi;
   district: string;
+  lat: number;
+  lng: number;
   cover: string;
   tagline: Bi;
   story: Bi;
@@ -60,6 +62,8 @@ export const villages: Village[] = [
     id: "bishnoi",
     name: { en: "Bishnoi Village, Guda", hi: "बिश्नोई गाँव, गुड़ा" },
     district: "jodhpur",
+    lat: 26.1806,
+    lng: 73.0,
     cover: villageJodhpur,
     tagline: { en: "Nature keepers of the Thar", hi: "थार के प्रकृति रक्षक" },
     story: {
@@ -77,6 +81,8 @@ export const villages: Village[] = [
     id: "salawas",
     name: { en: "Salawas", hi: "सालावास" },
     district: "jodhpur",
+    lat: 26.1667,
+    lng: 72.9333,
     cover: heroVillage,
     tagline: { en: "The dhurrie weavers' village", hi: "दरी बुनकरों का गाँव" },
     story: {
@@ -94,6 +100,8 @@ export const villages: Village[] = [
     id: "raisar",
     name: { en: "Raisar", hi: "रायसर" },
     district: "bikaner",
+    lat: 27.9333,
+    lng: 73.45,
     cover: villageBikaner,
     tagline: { en: "Where papad dries in the sun", hi: "जहाँ धूप में पापड़ सूखते हैं" },
     story: {
@@ -111,6 +119,8 @@ export const villages: Village[] = [
     id: "napasar",
     name: { en: "Napasar", hi: "नापासर" },
     district: "bikaner",
+    lat: 27.95,
+    lng: 73.55,
     cover: villageBikaner,
     tagline: { en: "Spice mills and folk music", hi: "मसाला चक्की और लोक संगीत" },
     story: {
@@ -128,6 +138,8 @@ export const villages: Village[] = [
     id: "kotra",
     name: { en: "Kotra", hi: "कोटड़ा" },
     district: "udaipur",
+    lat: 24.3167,
+    lng: 73.2,
     cover: villageUdaipur,
     tagline: { en: "Tribal hills of the Aravalli", hi: "अरावली की आदिवासी पहाड़ियाँ" },
     story: {
@@ -145,6 +157,8 @@ export const villages: Village[] = [
     id: "delwara",
     name: { en: "Delwara", hi: "देलवाड़ा" },
     district: "udaipur",
+    lat: 24.85,
+    lng: 73.7167,
     cover: villageUdaipur,
     tagline: { en: "Stepwells, temples and thali food", hi: "बावड़ी, मंदिर और थाली" },
     story: {
@@ -562,3 +576,50 @@ export const getProducer = (id: string) => producers.find((p) => p.id === id);
 export const getProduct = (id: string) => products.find((p) => p.id === id);
 export const districtName = (id: string) =>
   districts.find((d) => d.id === id)?.name ?? { en: id, hi: id };
+
+export type OriginCity = { id: string; name: Bi; lat: number; lng: number };
+
+export const originCities: OriginCity[] = [
+  { id: "jaipur", name: { en: "Jaipur", hi: "जयपुर" }, lat: 26.9124, lng: 75.7873 },
+  { id: "jodhpur", name: { en: "Jodhpur", hi: "जोधपुर" }, lat: 26.2389, lng: 73.0243 },
+  { id: "udaipur", name: { en: "Udaipur", hi: "उदयपुर" }, lat: 24.5854, lng: 73.7125 },
+  { id: "bikaner", name: { en: "Bikaner", hi: "बीकानेर" }, lat: 28.0229, lng: 73.3119 },
+  { id: "jaisalmer", name: { en: "Jaisalmer", hi: "जैसलमेर" }, lat: 26.9157, lng: 70.9083 },
+  { id: "delhi", name: { en: "Delhi", hi: "दिल्ली" }, lat: 28.6139, lng: 77.209 },
+  { id: "ahmedabad", name: { en: "Ahmedabad", hi: "अहमदाबाद" }, lat: 23.0225, lng: 72.5714 },
+];
+
+export const distanceKm = (
+  a: { lat: number; lng: number },
+  b: { lat: number; lng: number },
+) => {
+  const R = 6371;
+  const dLat = ((b.lat - a.lat) * Math.PI) / 180;
+  const dLng = ((b.lng - a.lng) * Math.PI) / 180;
+  const la1 = (a.lat * Math.PI) / 180;
+  const la2 = (b.lat * Math.PI) / 180;
+  const h =
+    Math.sin(dLat / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dLng / 2) ** 2;
+  return Math.round(2 * R * Math.asin(Math.sqrt(h)));
+};
+
+export const driveHours = (km: number) => Math.max(0.5, Math.round((km / 45) * 2) / 2);
+
+export const mapsPlaceUrl = (v: { name: Bi; lat: number; lng: number }) =>
+  `https://www.google.com/maps/search/?api=1&query=${v.lat},${v.lng}`;
+
+export const mapsDirectionsUrl = (
+  from: { lat: number; lng: number } | null,
+  to: { lat: number; lng: number },
+) =>
+  from
+    ? `https://www.google.com/maps/dir/?api=1&origin=${from.lat},${from.lng}&destination=${to.lat},${to.lng}&travelmode=driving`
+    : `https://www.google.com/maps/dir/?api=1&destination=${to.lat},${to.lng}&travelmode=driving`;
+
+export const getOriginCity = (id: string) => originCities.find((c) => c.id === id);
+
+export const villagesNear = (origin: OriginCity, maxKm?: number) =>
+  villages
+    .map((v) => ({ village: v, km: distanceKm(origin, v) }))
+    .filter((x) => (maxKm ? x.km <= maxKm : true))
+    .sort((a, b) => a.km - b.km);
