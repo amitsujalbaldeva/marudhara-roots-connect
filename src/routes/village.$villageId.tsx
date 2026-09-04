@@ -79,6 +79,56 @@ function VillagePage() {
         </div>
       </div>
 
+      <div className="px-4 pt-5">
+        <div className="surface p-3">
+          <h3 className="text-sm font-bold">
+            {L({ en: "How to reach", hi: "कैसे पहुँचें" })}
+          </h3>
+          <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
+            {originCities.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => setFrom(c.id)}
+                className={`chip h-10 shrink-0 px-3 ${from === c.id ? "chip-active" : ""}`}
+              >
+                {L(c.name)}
+              </button>
+            ))}
+          </div>
+          <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-bold text-teal">
+            <span>
+              {L(origin.name)} → {L(village.name)}: ≈ {km} km
+            </span>
+            <span className="flex items-center gap-1">
+              <Clock className="h-3.5 w-3.5" />
+              {driveHours(km)} {L({ en: "hr by road", hi: "घंटे सड़क से" })}
+            </span>
+          </p>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <a
+              href={mapsDirectionsUrl(origin, village)}
+              target="_blank"
+              rel="noreferrer"
+              className="tap btn-teal h-11 text-sm"
+            >
+              <Navigation className="h-4 w-4" />
+              {L({ en: "Directions", hi: "रास्ता देखें" })}
+            </a>
+            <a
+              href={mapsPlaceUrl(village)}
+              target="_blank"
+              rel="noreferrer"
+              className="tap btn-outline h-11 text-sm"
+            >
+              <MapPin className="h-4 w-4" />
+              {L({ en: "On map", hi: "नक्शे पर" })}
+            </a>
+          </div>
+        </div>
+      </div>
+
+
       {vStays.length ? (
         <>
           <SectionHead title={t("homestays")} />
