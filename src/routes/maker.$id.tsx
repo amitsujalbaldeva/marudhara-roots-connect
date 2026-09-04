@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BadgeCheck, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { BadgeCheck, Copy, IndianRupee, MapPin, Phone } from "lucide-react";
 import { Screen, SectionHead, TopBar } from "@/components/AppShell";
 import { supabase } from "@/integrations/supabase/client";
 import { districtName } from "@/lib/data";
