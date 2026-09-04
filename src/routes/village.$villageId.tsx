@@ -55,6 +55,12 @@ function VillagePage() {
   const vStays = homestays.filter((h) => h.villageId === villageId);
   const vExp = experiences.filter((e) => e.villageId === villageId);
 
+  const [from, setFrom] = useState("jaipur");
+  const origin = (originCities.find((c) => c.id === from) ?? originCities[0]) as OriginCity;
+  const km = distanceKm(origin, village);
+
+
+
   return (
     <Screen>
       <TopBar title={L(village.name)} />
