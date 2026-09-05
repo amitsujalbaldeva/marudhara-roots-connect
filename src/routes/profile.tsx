@@ -30,7 +30,7 @@ export const Route = createFileRoute("/profile")({
 
 const input = "h-12 w-full rounded-2xl border border-border bg-card px-3 text-base";
 
-function Avatar({ path }: { path?: string | null }) {
+function Avatar({ path }: { path?: string | null | undefined }) {
   const url = useMediaUrl(path);
   if (!url) return <div className="h-16 w-16 rounded-2xl bg-muted" />;
   return <img src={url} alt="" className="h-16 w-16 rounded-2xl object-cover" />;
