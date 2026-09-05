@@ -98,6 +98,10 @@ function Home() {
         ))}
       </ul>
 
+      <LiveProducts />
+
+
+
       <SectionHead title={t("makers")} href="/explore" />
       <div className="grid gap-3 px-4">
         {producers.slice(0, 3).map((p) => (
