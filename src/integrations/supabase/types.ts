@@ -14,6 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          sender_id: string
+          thread_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          sender_id: string
+          thread_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          sender_id?: string
+          thread_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "chat_threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chat_threads: {
+        Row: {
+          buyer_id: string
+          created_at: string
+          id: string
+          last_message_at: string
+          producer_id: string
+          product_id: string | null
+          product_name: string | null
+          seller_id: string
+        }
+        Insert: {
+          buyer_id: string
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          producer_id: string
+          product_id?: string | null
+          product_name?: string | null
+          seller_id: string
+        }
+        Update: {
+          buyer_id?: string
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          producer_id?: string
+          product_id?: string | null
+          product_name?: string | null
+          seller_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_threads_producer_id_fkey"
+            columns: ["producer_id"]
+            isOneToOne: false
+            referencedRelation: "producer_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chat_threads_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "producer_products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       producer_products: {
         Row: {
           category: string | null
