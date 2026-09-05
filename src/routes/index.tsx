@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, Sparkles } from "lucide-react";
 import { SectionHead, Screen } from "@/components/AppShell";
 import { MakerCard, ProductCard, VillageCard } from "@/components/cards";
+import { LiveProducts } from "@/components/LiveProducts";
 import { categories, districts, images, journeySteps, producers, products, villages } from "@/lib/data";
 import { useLang, useLocal } from "@/lib/i18n";
 
@@ -97,6 +98,10 @@ function Home() {
           </li>
         ))}
       </ul>
+
+      <LiveProducts />
+
+
 
       <SectionHead title={t("makers")} href="/explore" />
       <div className="grid gap-3 px-4">
