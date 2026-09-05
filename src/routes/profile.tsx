@@ -1,10 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, LayoutDashboard, ShieldCheck, Store } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Heart, LayoutDashboard, LogOut, Mail, ShieldCheck, Store } from "lucide-react";
+import { toast } from "sonner";
 import { Screen, SectionHead, TopBar } from "@/components/AppShell";
 import { MakerCard } from "@/components/cards";
+import { supabase } from "@/integrations/supabase/client";
+import { useSupabaseUser } from "@/hooks/useSupabaseUser";
 import { producers } from "@/lib/data";
 import { LANGUAGES, useLang } from "@/lib/i18n";
 import { useApp, type Role } from "@/lib/store";
+import { useMediaUrl, type LiveProfile } from "@/lib/live";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({
