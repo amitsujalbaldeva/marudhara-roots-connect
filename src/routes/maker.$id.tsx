@@ -1,14 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { BadgeCheck, Copy, IndianRupee, MapPin, Phone } from "lucide-react";
+import QRCode from "qrcode";
+import { BadgeCheck, Copy, IndianRupee, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Screen, SectionHead, TopBar } from "@/components/AppShell";
 import { supabase } from "@/integrations/supabase/client";
 import { districtName } from "@/lib/data";
 import { useLocal } from "@/lib/i18n";
 import { rupee } from "@/lib/store";
+import { useSupabaseUser } from "@/hooks/useSupabaseUser";
+import { openThread } from "@/lib/chat";
 import { useMediaUrl, type LiveCulture, type LiveProduct, type LiveProfile } from "@/lib/live";
+
 
 export const Route = createFileRoute("/maker/$id")({
   head: () => ({

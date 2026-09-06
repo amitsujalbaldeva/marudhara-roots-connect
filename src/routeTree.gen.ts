@@ -23,6 +23,7 @@ import { Route as ProducerDashboardRouteImport } from './routes/producer-dashboa
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as ChatThreadIdRouteImport } from './routes/chat.$threadId'
 import { Route as MakerIdRouteImport } from './routes/maker.$id'
 import { Route as ProducerProducerIdRouteImport } from './routes/producer.$producerId'
 import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
@@ -99,6 +100,11 @@ const StudioRoute = StudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChatThreadIdRoute = ChatThreadIdRouteImport.update({
+  id: '/chat/$threadId',
+  path: '/chat/$threadId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MakerIdRoute = MakerIdRouteImport.update({
   id: '/maker/$id',
   path: '/maker/$id',
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/chat/$threadId'
     | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/chat/$threadId'
     | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
@@ -248,6 +259,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/chat/$threadId'
     | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
@@ -270,6 +282,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   ShopRoute: typeof ShopRoute
   StudioRoute: typeof StudioRoute
+  ChatThreadIdRoute: typeof ChatThreadIdRoute
   MakerIdRoute: typeof MakerIdRoute
   ProducerProducerIdRoute: typeof ProducerProducerIdRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
@@ -377,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chat/$threadId': {
+      id: '/chat/$threadId'
+      path: '/chat/$threadId'
+      fullPath: '/chat/$threadId'
+      preLoaderRoute: typeof ChatThreadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/maker/$id': {
       id: '/maker/$id'
       path: '/maker/$id'
@@ -430,6 +450,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   ShopRoute: ShopRoute,
   StudioRoute: StudioRoute,
+  ChatThreadIdRoute: ChatThreadIdRoute,
   MakerIdRoute: MakerIdRoute,
   ProducerProducerIdRoute: ProducerProducerIdRoute,
   ProductProductIdRoute: ProductProductIdRoute,
