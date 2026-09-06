@@ -268,6 +268,10 @@ function MakerPage() {
           </a>
         ) : null}
 
+        <div className="mt-3">
+          <ChatButton maker={maker} />
+        </div>
+
         {maker.upi_id ? <UpiPay upiId={maker.upi_id} payeeName={maker.upi_name ?? maker.name} /> : null}
       </div>
 
