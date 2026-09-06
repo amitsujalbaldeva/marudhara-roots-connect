@@ -290,6 +290,9 @@ function MakerPage() {
                   {p.facilities ? (
                     <p className="mt-2 text-xs font-semibold text-teal">{p.facilities}</p>
                   ) : null}
+                  <div className="mt-3">
+                    <ChatButton maker={maker} product={p} variant="outline" />
+                  </div>
                 </div>
               </li>
             ))}
