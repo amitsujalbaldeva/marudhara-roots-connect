@@ -38,9 +38,34 @@ function Media({ path, className }: { path?: string | null; className?: string }
 
 function UpiPay({ upiId, payeeName }: { upiId: string; payeeName: string }) {
   const [amount, setAmount] = useState("");
+  const [qr, setQr] = useState<string | null>(null);
   const link = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payeeName)}&cu=INR${
     Number(amount) > 0 ? `&am=${Number(amount)}` : ""
   }`;
+
+  useEffect(() => {
+    let alive = true;
+    QRCode.toDataURL(link, { margin: 1, width: 320 })
+      .then((url) => {
+        if (alive) setQr(url);
+      })
+      .catch(() => setQr(null));
+    return () => {
+      alive = false;
+    };
+  }, [link]);
+
+  const openApp = () => {
+    try {
+      const w = window.top ?? window;
+      w.location.href = link;
+    } catch {
+      window.location.href = link;
+    }
+    setTimeout(() => {
+      toast.info("अगर कोई ऐप न खुले तो नीचे QR स्कैन करें या UPI ID कॉपी करें।");
+    }, 1200);
+  };
 
   return (
     <div className="surface mt-4 grid gap-3 p-4">
@@ -58,14 +83,26 @@ function UpiPay({ upiId, payeeName }: { upiId: string; payeeName: string }) {
         placeholder="राशि ₹ / Amount (optional)"
         className="h-12 w-full rounded-2xl border border-border bg-card px-3 text-base"
       />
-      <a href={link} className="tap btn-primary w-full text-sm">
+      <button type="button" onClick={openApp} className="tap btn-primary w-full text-sm">
         GPay / PhonePe / Paytm से भेजें
-      </a>
+      </button>
+      {qr ? (
+        <div className="grid justify-items-center gap-1">
+          <img src={qr} alt="UPI QR" className="h-40 w-40 rounded-2xl bg-white p-2" />
+          <span className="text-[11px] text-muted-foreground">
+            किसी भी UPI ऐप से यह QR स्कैन करें / Scan this QR
+          </span>
+        </div>
+      ) : null}
       <button
         type="button"
         onClick={async () => {
-          await navigator.clipboard.writeText(upiId);
-          toast.success("UPI ID कॉपी हो गई / Copied");
+          try {
+            await navigator.clipboard.writeText(upiId);
+            toast.success("UPI ID कॉपी हो गई / Copied");
+          } catch {
+            toast.error("कॉपी नहीं हुआ — UPI ID हाथ से लिखें");
+          }
         }}
         className="tap btn-outline w-full text-sm"
       >
@@ -77,6 +114,57 @@ function UpiPay({ upiId, payeeName }: { upiId: string; payeeName: string }) {
     </div>
   );
 }
+
+function ChatButton({
+  maker,
+  product,
+  variant = "primary",
+}: {
+  maker: LiveProfile;
+  product?: LiveProduct;
+  variant?: "primary" | "outline";
+}) {
+  const { user } = useSupabaseUser();
+  const navigate = useNavigate();
+  const [busy, setBusy] = useState(false);
+
+  return (
+    <button
+      type="button"
+      disabled={busy}
+      onClick={async () => {
+        if (!user) {
+          navigate({ to: "/auth" });
+          return;
+        }
+        if (user.id === maker.user_id) {
+          toast.info("यह आपका ही पेज है / This is your own page.");
+          return;
+        }
+        setBusy(true);
+        try {
+          const id = await openThread({
+            buyerId: user.id,
+            sellerId: maker.user_id,
+            producerId: maker.id,
+            productId: product?.id ?? null,
+            productName: product?.name ?? null,
+          });
+          navigate({ to: "/chat/$threadId", params: { threadId: id } });
+        } catch (e) {
+          toast.error((e as Error).message);
+        } finally {
+          setBusy(false);
+        }
+      }}
+      className={`tap w-full text-sm ${variant === "primary" ? "btn-teal" : "btn-outline"} disabled:opacity-50`}
+    >
+      <MessageCircle className="h-4 w-4" />
+      {product ? "इस उत्पाद पर बात करें" : "कारीगर से बात करें / Chat with maker"}
+    </button>
+  );
+}
+
 
 function MakerPage() {
   const { id } = Route.useParams();
