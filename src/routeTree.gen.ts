@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as ChatsRouteImport } from './routes/chats'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ExploreRouteImport } from './routes/explore'
@@ -22,6 +23,7 @@ import { Route as ProducerDashboardRouteImport } from './routes/producer-dashboa
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as ChatThreadIdRouteImport } from './routes/chat.$threadId'
 import { Route as MakerIdRouteImport } from './routes/maker.$id'
 import { Route as ProducerProducerIdRouteImport } from './routes/producer.$producerId'
 import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
@@ -46,6 +48,11 @@ const AuthRoute = AuthRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatsRoute = ChatsRouteImport.update({
+  id: '/chats',
+  path: '/chats',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -93,6 +100,11 @@ const StudioRoute = StudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChatThreadIdRoute = ChatThreadIdRouteImport.update({
+  id: '/chat/$threadId',
+  path: '/chat/$threadId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MakerIdRoute = MakerIdRouteImport.update({
   id: '/maker/$id',
   path: '/maker/$id',
@@ -124,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
+  '/chats': typeof ChatsRoute
   '/checkout': typeof CheckoutRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
@@ -133,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
@@ -144,6 +158,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
+  '/chats': typeof ChatsRoute
   '/checkout': typeof CheckoutRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
@@ -153,6 +168,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
@@ -165,6 +181,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
+  '/chats': typeof ChatsRoute
   '/checkout': typeof CheckoutRoute
   '/community': typeof CommunityRoute
   '/explore': typeof ExploreRoute
@@ -174,6 +191,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/shop': typeof ShopRoute
   '/studio': typeof StudioRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/maker/$id': typeof MakerIdRoute
   '/producer/$producerId': typeof ProducerProducerIdRoute
   '/product/$productId': typeof ProductProductIdRoute
@@ -187,6 +205,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/cart'
+    | '/chats'
     | '/checkout'
     | '/community'
     | '/explore'
@@ -196,6 +215,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/chat/$threadId'
     | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
@@ -207,6 +227,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/cart'
+    | '/chats'
     | '/checkout'
     | '/community'
     | '/explore'
@@ -216,6 +237,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/chat/$threadId'
     | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
@@ -227,6 +249,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/cart'
+    | '/chats'
     | '/checkout'
     | '/community'
     | '/explore'
@@ -236,6 +259,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/shop'
     | '/studio'
+    | '/chat/$threadId'
     | '/maker/$id'
     | '/producer/$producerId'
     | '/product/$productId'
@@ -248,6 +272,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   CartRoute: typeof CartRoute
+  ChatsRoute: typeof ChatsRoute
   CheckoutRoute: typeof CheckoutRoute
   CommunityRoute: typeof CommunityRoute
   ExploreRoute: typeof ExploreRoute
@@ -257,6 +282,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   ShopRoute: typeof ShopRoute
   StudioRoute: typeof StudioRoute
+  ChatThreadIdRoute: typeof ChatThreadIdRoute
   MakerIdRoute: typeof MakerIdRoute
   ProducerProducerIdRoute: typeof ProducerProducerIdRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
@@ -292,6 +318,13 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chats': {
+      id: '/chats'
+      path: '/chats'
+      fullPath: '/chats'
+      preLoaderRoute: typeof ChatsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -357,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chat/$threadId': {
+      id: '/chat/$threadId'
+      path: '/chat/$threadId'
+      fullPath: '/chat/$threadId'
+      preLoaderRoute: typeof ChatThreadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/maker/$id': {
       id: '/maker/$id'
       path: '/maker/$id'
@@ -400,6 +440,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   CartRoute: CartRoute,
+  ChatsRoute: ChatsRoute,
   CheckoutRoute: CheckoutRoute,
   CommunityRoute: CommunityRoute,
   ExploreRoute: ExploreRoute,
@@ -409,6 +450,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   ShopRoute: ShopRoute,
   StudioRoute: StudioRoute,
+  ChatThreadIdRoute: ChatThreadIdRoute,
   MakerIdRoute: MakerIdRoute,
   ProducerProducerIdRoute: ProducerProducerIdRoute,
   ProductProductIdRoute: ProductProductIdRoute,

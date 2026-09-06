@@ -296,6 +296,10 @@ function Profile() {
           <LayoutDashboard className="h-4 w-4" />
           गाँव समुदाय / Live village community
         </Link>
+        <Link to="/chats" className="tap btn-outline w-full text-sm">
+          <LayoutDashboard className="h-4 w-4" />
+          मेरी बातचीत / My chats
+        </Link>
         <Link to="/producer-dashboard" className="tap btn-outline w-full text-sm">
           <LayoutDashboard className="h-4 w-4" />
           {t("producerDashboard")}

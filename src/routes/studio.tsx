@@ -154,9 +154,9 @@ function Studio() {
         user_id: user!.id,
         producer_id: profile.id,
         name: pr.name.trim(),
-        price: Number(pr.price) || 0,
+        price: Number((pr.price.match(/[\d.]+/) ?? ["0"])[0]) || 0,
         unit: pr.unit || null,
-        stock: Number(pr.stock) || 0,
+        stock: Number((pr.stock.match(/\d+/) ?? ["0"])[0]) || 0,
         category: pr.category,
         story: pr.story || null,
         facilities: pr.facilities || null,
@@ -309,8 +309,8 @@ function Studio() {
       <div className="grid gap-3 px-4">
         <input value={pr.name} onChange={(e) => setPr({ ...pr, name: e.target.value })} placeholder="उत्पाद का नाम / Product name" className={input} />
         <div className="grid grid-cols-2 gap-3">
-          <input value={pr.price} onChange={(e) => setPr({ ...pr, price: e.target.value })} inputMode="numeric" placeholder="कीमत ₹ / Price" className={input} />
-          <input value={pr.stock} onChange={(e) => setPr({ ...pr, stock: e.target.value })} inputMode="numeric" placeholder="स्टॉक / Stock" className={input} />
+          <input value={pr.price} onChange={(e) => setPr({ ...pr, price: e.target.value })} type="text" inputMode="text" placeholder="कीमत ₹ / Price (जैसे 250 या 250 प्रति किलो)" className={input} />
+          <input value={pr.stock} onChange={(e) => setPr({ ...pr, stock: e.target.value })} type="text" inputMode="text" placeholder="स्टॉक / Stock (जैसे 20 पैकेट)" className={input} />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <input value={pr.unit} onChange={(e) => setPr({ ...pr, unit: e.target.value })} placeholder="मात्रा / Unit (500g)" className={input} />
