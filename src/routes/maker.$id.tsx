@@ -210,6 +210,8 @@ function MakerPage() {
   });
 
   const maker = makerQ.data;
+  const { user } = useSupabaseUser();
+  const isOwner = !!user && !!maker && user.id === maker.user_id;
 
   if (makerQ.isLoading) {
     return (
@@ -268,11 +270,23 @@ function MakerPage() {
           </a>
         ) : null}
 
-        <div className="mt-3">
-          <ChatButton maker={maker} />
-        </div>
-
-        {maker.upi_id ? <UpiPay upiId={maker.upi_id} payeeName={maker.upi_name ?? maker.name} /> : null}
+        {isOwner ? (
+          <div className="surface mt-3 p-4 text-sm">
+            <p className="font-bold text-teal">यह आपकी दुकान है / This is your shop</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              आप अपना ही उत्पाद नहीं खरीद सकते। बदलाव के लिए "मेरा स्टूडियो" खोलें।
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="mt-3">
+              <ChatButton maker={maker} />
+            </div>
+            {maker.upi_id ? (
+              <UpiPay upiId={maker.upi_id} payeeName={maker.upi_name ?? maker.name} />
+            ) : null}
+          </>
+        )}
       </div>
 
       {productsQ.data?.length ? (
@@ -294,9 +308,11 @@ function MakerPage() {
                   {p.facilities ? (
                     <p className="mt-2 text-xs font-semibold text-teal">{p.facilities}</p>
                   ) : null}
-                  <div className="mt-3">
-                    <ChatButton maker={maker} product={p} variant="outline" />
-                  </div>
+                  {isOwner ? null : (
+                    <div className="mt-3">
+                      <ChatButton maker={maker} product={p} variant="outline" />
+                    </div>
+                  )}
                 </div>
               </li>
             ))}
